@@ -1,0 +1,37 @@
+The progress of our project is: Completed.
+
+Who did what:
+  Nate- Coded the Start and MyPrintableTable classes.
+          *Start is just the main method to start the GUI program.
+          *MyPrintableTable is used to format what a printed file should look like.
+                Nate spent most of his time on this, trying to understand it and implement it.
+                
+  Mohamed- Coded the Exceptions and SetNewClass classes.
+          *Exceptions is the class that catches any exception and provides a related dialog box to the user
+          *SetNewClass requires a lot of exception handling. It reads the contents of a folder for txt files
+                to check if the user entered a name for a file that already exists.
+                
+  Jaspreet- Coded the LoadClass and MainMenu classes.
+          *MainMenu is a screen with two buttons, prompting the user to load or create a class.
+          *LoadClass allows the user to pick from a list of previously created classes. It reads from a folder 
+                to find the previously created classes.
+                
+  Tannon- Coded the NewClass and LoadedClass classes. Also pieced the classes together.
+          *NewClass takes the imput from SetNewClass to provide an editable table of values. Allows the user to 
+                save the class to be loaded in LoadClass and print the table values to a physical printer.
+          *Loaded class takes the selected class in LoadClass and presents the table with the same values as it 
+                it was last saved as. Provides the option to save and print like NewClass.
+          *Figured out how to pass parameters to each class to make the project run smoothly.
+          
+Everybody helped with bug fixing and beta testing.
+
+What was difficult:
+  *Creating, editing, and reading the contents of directories and txt files.
+  *Figuring out how to create a normal looking format for print files.
+  *Bug fixing. Catching as many errors in the code as possible.
+  *Creating a workable GUI application withouot learning anything about GUI coding in class.
+  *Figuring out how to print to an external printer.
+  
+  
+What is already completed:  
+  *Everything.
