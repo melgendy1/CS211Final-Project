@@ -34,4 +34,7 @@ What was difficult:
   
   
 What is already completed:  
-  *Everything.
+  *All the code.
+  
+What needs to be done:
+  *Comments
