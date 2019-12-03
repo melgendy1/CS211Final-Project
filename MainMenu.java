@@ -12,17 +12,25 @@ public class MainMenu extends JFrame {
 
     public MainMenu() {
 
+        /*
+        * Sets title 
+        */
         this.setTitle("Grading");
         this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 
-        //pane with null layout
+        /*
+        * pane with null layout
+        */
         JPanel contentPane = new JPanel(null);
         JFrame frame = new JFrame();
         frame.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
         frame.setAlwaysOnTop(false);
 
         frame.setBackground(new Color(192, 192, 192));
-
+        
+        /*
+        * creating buttons
+        */
         button1 = new JButton();
         button1.setBounds(SwingConstants.CENTER+200, SwingConstants.CENTER, 160, 46);
         button1.setLocation((((this.getWidth()-button1.getWidth())/2)+200),(this.getHeight()-button1.getHeight())/2);
@@ -67,12 +75,16 @@ public class MainMenu extends JFrame {
         label1.setText("Select an option");
         label1.setVisible(true);
 
-        //adding components to contentPane panel
+        /*
+        *adding components to contentPane panel
+        */
         frame.add(button1);
         frame.add(button2);
         frame.add(label1);
 
-        //adding panel to JFrame and seting of window position and close operation
+        /*
+        *adding panel to JFrame and seting of window position and close operation
+        */
         frame.add(contentPane);
         frame.setTitle("Student Grades");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
