@@ -11,7 +11,9 @@ public class LoadClass extends JFrame{
     private JComboBox combobox1;
     private JLabel label1;
 
-    //Constructor
+    /*
+    *Constructor
+    */
     public LoadClass(){
         File folder = new File("./txtFiles");
         File[] files = folder.listFiles();
@@ -25,8 +27,9 @@ public class LoadClass extends JFrame{
         //menu generate method
 
         this.setJMenuBar(menuBar);
-        
-        //pane with null layout
+        /*
+        *pane with null layout
+        */
         JPanel contentPane = new JPanel(null);
         JFrame frame = new JFrame();
         frame.setPreferredSize( Toolkit.getDefaultToolkit().getScreenSize());
@@ -48,7 +51,7 @@ public class LoadClass extends JFrame{
         button1.setVisible(true);
 
         /*
-        * This handles an error message that a user might come across. 
+        * This handles an error message that a user might come across also adds information into the combo box.
         */
         button1.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -93,7 +96,12 @@ public class LoadClass extends JFrame{
                     frame.dispose();
                 }
             });
-
+        
+        /*
+        * This reads the text files and if there is nothing inside the folder, it gives an empty combo box.
+        * Otherwise it makes a combo box that is essentially a drop down menu. It will contain the name of the text file
+        * Then you have the option to click on it and it redirects you to said text file.
+        */
         String[] txtFiles=new String[0];
         if(files!=null)
         { txtFiles = new String[files.length];
@@ -122,14 +130,18 @@ public class LoadClass extends JFrame{
         label1.setText("Pick a class to load");
         label1.setVisible(true);
 
-        //adding components to contentPane panel
+        /*
+        *adding components to contentPane panel
+        */
         contentPane.add(button1);
         contentPane.add(back);
         contentPane.add(combobox1);
         contentPane.add(label1);
-        //frame.add(contentPane);
+        
 
-        //adding panel to JFrame and seting of window position and close operation
+        /*
+        *adding panel to JFrame and seting of window position and close operation
+        */
         frame.add(contentPane);
         frame.setTitle("Student Grades");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -137,8 +149,9 @@ public class LoadClass extends JFrame{
         frame.setVisible(true);
     }
 
-    //method for generate menu
-
+    /*
+    *method for generate menu
+    */
 
     public static void main(String[] args){
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
