@@ -15,13 +15,17 @@ public class LoadClass extends JFrame{
     public LoadClass(){
         File folder = new File("./txtFiles");
         File[] files = folder.listFiles();
-
+        
+        /*
+        * Setting title and size for the page
+        */
+        
         this.setTitle("Load a Class");
         this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         //menu generate method
 
         this.setJMenuBar(menuBar);
-
+        
         //pane with null layout
         JPanel contentPane = new JPanel(null);
         JFrame frame = new JFrame();
@@ -29,7 +33,10 @@ public class LoadClass extends JFrame{
         frame.setAlwaysOnTop(false);
         frame.setVisible(true);
         frame.setResizable(true);
-
+        
+        /*
+        * Setting the location, colors, font, and text size for the button
+        */
         button1 = new JButton();
         button1.setBounds(296,234,90,35);
         button1.setLocation(((((this.getWidth()-button1.getWidth())/2)+200)),((this.getHeight()/2)-100));
@@ -40,7 +47,9 @@ public class LoadClass extends JFrame{
         button1.setText("Load");
         button1.setVisible(true);
 
-
+        /*
+        * This handles an error message that a user might come across. 
+        */
         button1.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 
@@ -65,7 +74,10 @@ public class LoadClass extends JFrame{
                 }
 
             });
-
+            
+        /*
+        * Setting the bounds for the 'back' button
+        */
         JButton back = new JButton();
         back.setBounds(200,334,90,35);
         back.setLocation((((this.getWidth()-back.getWidth())/2)),((this.getHeight()/2)+100));
