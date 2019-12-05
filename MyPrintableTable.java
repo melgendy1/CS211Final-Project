@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Font;
 import java.awt.Color;
+
 public class MyPrintableTable implements Printable {
     private int linesPerPage = 30;
     private List<String> sTable;
