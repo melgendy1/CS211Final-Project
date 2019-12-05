@@ -27,7 +27,7 @@ public class LoadedClass {
         this.numStudents=numStudents;
         this.numMeetings=numMeetings;
 
-        columnNames = new String[numMeetings*3+9];
+        columnNames = new String[numMeetings*3+10];
 
         int partNum=1;
         int quizNum=1;
@@ -44,19 +44,20 @@ public class LoadedClass {
             columnNames[i]="Assignment "+hwNum;
             hwNum++;
         }
-        for(int i=numMeetings*2+1;i<columnNames.length-8;i++)
+        for(int i=numMeetings*2+1;i<columnNames.length-9;i++)
         {
             columnNames[i]="Quiz "+quizNum;
             quizNum++;
         }
-        columnNames[columnNames.length-8]="Final Exam";
-        columnNames[columnNames.length-7]="Participation Average";
-        columnNames[columnNames.length-6]="Assignment Average";
-        columnNames[columnNames.length-5]="Quiz Average";
-        columnNames[columnNames.length-4]="Participation Total";
-        columnNames[columnNames.length-3]="Assignment Total";
-        columnNames[columnNames.length-2]="Quiz Total";
-        columnNames[columnNames.length-1]="Overall";
+        columnNames[columnNames.length-9]="Final Exam";
+        columnNames[columnNames.length-8]="Participation Average";
+        columnNames[columnNames.length-7]="Assignment Average";
+        columnNames[columnNames.length-6]="Quiz Average";
+        columnNames[columnNames.length-5]="Participation Total";
+        columnNames[columnNames.length-4]="Assignment Total";
+        columnNames[columnNames.length-3]="Quiz Total";
+        columnNames[columnNames.length-2]="Overall";
+        columnNames[columnNames.length-1]="Letter Grade";
 
         columnsWidth=new int[columnNames.length];
         columnsWidth[0]=200;
@@ -64,7 +65,7 @@ public class LoadedClass {
             columnsWidth[i]=120;
 
         int scrollPaneWidth = 200+(100*columnsWidth.length-2);
-        data = new String[numStudents][numMeetings*3+9];
+        data = new String[numStudents][numMeetings*3+10];
 
         try {
             File file = new File("./txtFiles/"+name+".txt");
@@ -79,6 +80,7 @@ public class LoadedClass {
                     data[i][j] = line;
                 }
             }
+            read.close();
         }
         catch (Exception t){JOptionPane.showMessageDialog(null,"Error happened");}
 
@@ -95,188 +97,271 @@ public class LoadedClass {
         JButton print = new JButton();
         print.setText("Print");
         print.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){
-                    if(table.isEditing())
-                        table.getCellEditor().stopCellEditing();
-                    boolean checkpoint=false;
-                    try{
-                        for (int i = 0;i<LoadedClass.numStudents;i++)
-                            for (int j=0;j<columnNames.length;j++)
-                            {
-                                if(  table.getValueAt(i,j)==null||table.getValueAt(i,j).equals(""))
-                                    table.setValueAt("N/A",i,j);
-                            }
-                        for (int i=0;i<LoadedClass.numStudents;i++){
-                            int quizTotal=0;
-                            int assTotal=0;
-                            int partTotal=0;
-                            int quizAveNum=0;
-                            int assAveNum=0;
-                            int partAveNum=0;
-                            for(int j=1;j<numMeetings+1;j++)
-                            {
-                                String value;
-                                value = table.getValueAt(i,j).toString();
+        	 if(table.isEditing())
+                 table.getCellEditor().stopCellEditing();
+             boolean checkpoint=false;
+             try{
+                 for (int i = 0;i<LoadedClass.numStudents;i++)
+                     for (int j=0;j<columnNames.length;j++)
+                     {
+                         if(  table.getValueAt(i,j)==null||table.getValueAt(i,j).equals(""))
+                             table.setValueAt("N/A",i,j);
+                     }
+                 for (int i=0;i<LoadedClass.numStudents;i++){
+                     int quizTotal=0;
+                     int assTotal=0;
+                     int partTotal=0;
+                     int quizAveNum=0;
+                     int assAveNum=0;
+                     int partAveNum=0;
+                     for(int j=1;j<numMeetings+1;j++)
+                     {
+                         String value;
+                         value = table.getValueAt(i,j).toString();
 
-                                if (!value.equals("N/A")||value.equals(""))
-                                {                            
-                                    partTotal+=Integer.parseInt(value);
-                                    table.setValueAt(value,i,j);
-                                    partAveNum++;
-                                }
-                                else
-                                    table.setValueAt(value,i,j);
-                            }
-                            for (int j=numMeetings+1;j<numMeetings*2+1;j++)
-                            {
-                                String value;
+                         if (!value.equals("N/A")||value.equals(""))
+                         {                            
+                             partTotal+=Integer.parseInt(value);
+                             table.setValueAt(value,i,j);
+                             partAveNum++;
+                         }
+                         else
+                             table.setValueAt(value,i,j);
+                     }
+                     for (int j=numMeetings+1;j<numMeetings*2+1;j++)
+                     {
+                         String value;
 
-                                value = table.getValueAt(i,j).toString();
-                                if (!value.equals("N/A")||value.equals(""))
-                                {                            
-                                    assTotal+=Integer.parseInt(value);
-                                    table.setValueAt(value,i,j);
-                                    assAveNum++;
-                                }
-                                else
-                                    table.setValueAt(value,i,j);
-                            }
-                            for(int j=numMeetings*2+1;j<columnNames.length-8;j++)
-                            {
-                                String value;
+                         value = table.getValueAt(i,j).toString();
+                         if (!value.equals("N/A")||value.equals(""))
+                         {                            
+                             assTotal+=Integer.parseInt(value);
+                             table.setValueAt(value,i,j);
+                             assAveNum++;
+                         }
+                         else
+                             table.setValueAt(value,i,j);
+                     }
+                     for(int j=numMeetings*2+1;j<columnNames.length-9;j++)
+                     {
+                         String value;
 
-                                value = table.getValueAt(i,j).toString();
-                                if (!value.equals("N/A")||value.equals(""))
-                                {                            
-                                    quizTotal+=Integer.parseInt(value);
-                                    table.setValueAt(value,i,j);
-                                    quizAveNum++;
-                                }
-                                else
-                                    table.setValueAt(value,i,j);
-                            }
+                         value = table.getValueAt(i,j).toString();
+                         if (!value.equals("N/A")||value.equals(""))
+                         {                            
+                             quizTotal+=Integer.parseInt(value);
+                             table.setValueAt(value,i,j);
+                             quizAveNum++;
+                         }
+                         else
+                             table.setValueAt(value,i,j);
+                     }
 
-                            String exam =  table.getValueAt(i,columnNames.length-8).toString();
-                            int finalExam=0;
-                            if (exam.equals("N/A")||exam.equals(""))
-                            {
-                                table.setValueAt(exam,i,columnNames.length-8);}
-                            else
-                            {
-                                finalExam= Integer.parseInt(exam);
-                                table.setValueAt(exam,i,columnNames.length-8);
-                            }
+                     String exam =  table.getValueAt(i,columnNames.length-9).toString();
+                     int finalExam=0;
+                     if (exam.equals("N/A")||exam.equals(""))
+                     {
+                         table.setValueAt(exam,i,columnNames.length-9);}
+                     else
+                     {
+                     
+                         finalExam= Integer.parseInt(exam);
+                         table.setValueAt(exam,i,columnNames.length-9);
+                     }
+                     
+                     
+                     int partAve=0;
+                     int assAve=0;
+                     int quizAve=0;
+                     if(partAveNum!=0)
+                         partAve=Math.round(partTotal/partAveNum);
+                     if(assAveNum!=0)
+                         assAve=Math.round(assTotal/assAveNum);
+                     if(quizAveNum!=0)
+                         quizAve=Math.round(quizTotal/quizAveNum);
 
-                            int partAve=0;
-                            int assAve=0;
-                            int quizAve=0;
-                            if(partAveNum!=0)
-                                partAve=Math.round(partTotal/partAveNum);
-                            if(assAveNum!=0)
-                                assAve=Math.round(assTotal/assAveNum);
-                            if(quizAveNum!=0)
-                                quizAve=Math.round(quizTotal/quizAveNum);
+                     table.setValueAt(partAve,i,columnNames.length-8);
+                     table.setValueAt(assAve,i,columnNames.length-7);
+                     table.setValueAt(quizAve,i,columnNames.length-6);
+                     table.setValueAt(Math.round(partAve*.1),i,columnNames.length-5);
+                     table.setValueAt(Math.round(assAve*.15),i,columnNames.length-4);
+                     table.setValueAt(Math.round(quizAve*.5),i,columnNames.length-3);
 
-                            table.setValueAt(partAve,i,columnNames.length-7);
-                            table.setValueAt(assAve,i,columnNames.length-6);
-                            table.setValueAt(quizAve,i,columnNames.length-5);
-                            table.setValueAt(Math.round(partAve*.1),i,columnNames.length-4);
-                            table.setValueAt(Math.round(assAve*.15),i,columnNames.length-3);
-                            table.setValueAt(Math.round(quizAve*.5),i,columnNames.length-2);
+                     table.setValueAt((Math.round(partAve*.1)+Math.round(assAve*.15)+Math.round(quizAve*.5)+Math.round(finalExam*.25)),i,columnNames.length-2);
+                     for(int j=columnNames.length-8;j<columnNames.length-1;j++)
+                     {
+                         String value=  table.getValueAt(i,j).toString();
+                         table.setValueAt(value,i,j);
+                     }
+                     
+                     
+                     int value = Integer.parseInt(table.getValueAt(i, columnNames.length-2).toString());
+                     if (value<=59) {
+                     table.setValueAt("F", i,columnNames.length-1);
 
-                            table.setValueAt((Math.round(partAve*.1)+Math.round(assAve*.15)+Math.round(quizAve*.5)+Math.round(finalExam*.25)),i,columnNames.length-1);
-                            for(int j=columnNames.length-8;j<columnNames.length;j++)
-                            {
-                                String value=  table.getValueAt(i,j).toString();
-                                table.setValueAt(value,i,j);
-                            }
 
-                        }
-                    }
-                    catch (Exception t) {
-                        //t.printStackTrace();
-                        new Exceptions("Please enter whole numbers.");
-                        checkpoint=true;
-                    }
-                    if (checkpoint==false)
-                        try {
-                            File parentDir = new File("./txtFiles");
-                            parentDir.mkdir();
-                            File file = new File(parentDir, name + ".txt");
-                            if(!file.exists())
-                                file.createNewFile();
+                 }
+                     if (value >= 60 && value <= 62 ) {
+                         table.setValueAt("D-", i,columnNames.length-1);
+ 
 
-                            PrintWriter writer = new PrintWriter(new FileWriter("./txtFiles/" + name + ".txt",false));
-                            data = new String[LoadedClass.numStudents][columnNames.length];
+                     }
+                     
+                     if (value >= 63 && value <= 66 ) {
+                         table.setValueAt("D", i,columnNames.length-1);
+ 
 
-                            for (int i = 0;i<LoadedClass.numStudents;i++)
-                                for (int j=0;j<columnNames.length;j++)
-                                    data[i][j] = (String) table.getValueAt(i, j);
+                     }
+                     
+                     if (value >= 67 && value <= 69 ) {
+                         table.setValueAt("D+", i,columnNames.length-1);
+ 
 
-                            writer.println(LoadedClass.numStudents);
-                            writer.println(LoadedClass.numMeetings);
+                     }
+                     
+                     if (value >= 70 && value <= 72 ) {
+                         table.setValueAt("C-", i,columnNames.length-1);
+ 
 
-                            for(int i=0;i<data.length;i++) {
-                                for (int j = 0; j < data[i].length; j++) {
-                                    writer.println(data[i][j]);
-                                }
+                     }
+                     
+                     if (value >= 73 && value <= 76 ) {
+                         table.setValueAt("C", i,columnNames.length-1);
+ 
 
-                            }
-                            writer.close();
-                        }
-                        catch(IOException t){JOptionPane.showMessageDialog(null, "This File does not exist.");}
-                    if (checkpoint==false)
-                        try {
-                            PrintWriter printFile = new PrintWriter(new FileWriter("./printFiles/"+name+".txt",false));
-                            printFile.println(name);
-                            printFile.println();
+                     }
+                     
+                     if (value >= 77 && value <= 79 ) {
+                         table.setValueAt("C+", i,columnNames.length-1);
+ 
 
-                            for (int i=0;i<LoadedClass.numStudents;i++){
-                                printFile.println("Student: "+ (String) table.getValueAt(i, 0));
-                                printFile.println();
-                                int num=1;
-                                for (int j=1;j<=LoadedClass.numMeetings;j++){
-                                    printFile.println("Participation "+num +": "+(String) table.getValueAt(i,j) +"      "+"Assignment "+num+": "+(String) table.getValueAt(i,j+LoadedClass.numMeetings)+"      "+"Quiz "+num+": "+(String) table.getValueAt(i,j+(LoadedClass.numMeetings*2)));
-                                    num++;
-                                }
-                                printFile.println();
-                                printFile.println("Participation average: "+(String) table.getValueAt(i, columnNames.length-7) +"     "+ "Assignment average: "+(String)table.getValueAt(i, columnNames.length-6) + "       "+"Quiz average: "+(String) table.getValueAt(i, columnNames.length-5));
-                                printFile.println();
-                                printFile.println("Participation total: "+(String) table.getValueAt(i, columnNames.length-4) +"     "+ "Assignment total: "+(String)table.getValueAt(i, columnNames.length-3) + "       "+"Quiz total: "+(String) table.getValueAt(i, columnNames.length-2));
-                                printFile.println();
-                                printFile.println("Final Exam: " + (String) table.getValueAt(i, columnNames.length-8));
-                                printFile.println("Overall: " + (String) table.getValueAt(i, columnNames.length-1));
-                                printFile.println();
-                                printFile.println();
+                     }
+                     
+                     if (value >= 80 && value <= 82 ) {
+                         table.setValueAt("B-", i,columnNames.length-1);
+ 
 
-                            }
+                     }
+                     
+                     if (value >= 83 && value <= 86 ) {
+                         table.setValueAt("B", i,columnNames.length-1);
+ 
 
-                            printFile.close();
+                     }
+                     
+                     if (value >= 87 && value <= 89 ) {
+                         table.setValueAt("B+", i,columnNames.length-1);
+ 
 
-                            ArrayList<String> print= new ArrayList<>();;
+                     }
+                     
+                     if (value >= 90 && value <= 92 ) {
+                         table.setValueAt("A-", i,columnNames.length-1);
+ 
 
-                            try {
-                                File file = new File("./printFiles/"+name+".txt");
-                                Scanner read = new Scanner(new FileReader(file));
-                                while(read.hasNextLine()){
-                                    print.add(read.nextLine());
-                                }
-                                read.close();
-                            }
+                     }
+                     
+                     if (value >= 93 && value <= 96 ) {
+                         table.setValueAt("A", i,columnNames.length-1);
+ 
 
-                            catch (Exception t){JOptionPane.showMessageDialog(null,"Error happened");}
-                            MyPrintableTable mpt = new MyPrintableTable(print);
-                            PrinterJob job = PrinterJob.getPrinterJob();
-                            // PageFormat pf = job.defaultPage();
-                            job.setPrintable(mpt);
-                            job.printDialog();
-                            try {
-                                job.print();
-                            } catch (PrinterException t) {
-                                new Exceptions("Printing failed");
-                            }
+                     }
+                     
+                     if (value >= 97 ) {
+                         table.setValueAt("A+", i,columnNames.length-1);
+ 
 
-                        }
-                        catch(Exception t) { new Exceptions("This File does not exist.");}
+                     }
+             }
+             }
+             catch (Exception t) {
+                 //t.printStackTrace();
+                 new Exceptions("Please enter whole numbers.");
+                 checkpoint=true;
+             }
+
+             if(checkpoint==false)
+                 try {
+
+                     File parentDir = new File("./txtFiles");
+                     parentDir.mkdir();
+                     File file = new File(parentDir, name + ".txt");
+                     if(!file.exists())
+                         file.createNewFile();
+
+                     PrintWriter writer = new PrintWriter(new FileWriter("./txtFiles/" + name + ".txt",false));
+                     data = new String[LoadedClass.numStudents][columnNames.length];
+
+                     for (int i = 0;i<LoadedClass.numStudents;i++)
+                         for (int j=0;j<columnNames.length;j++)
+                             data[i][j] = (String) table.getValueAt(i, j);
+
+                     writer.println(LoadedClass.numStudents);
+                     writer.println(LoadedClass.numMeetings);
+
+                     for(int i=0;i<data.length;i++) {
+                         for (int j = 0; j < data[i].length; j++) {
+                             writer.println(data[i][j]);
+                         }
+
+                     }
+                     writer.close();
+                 }
+                 catch(IOException t){JOptionPane.showMessageDialog(null, "This File does not exist.");
+                     checkpoint=true;
+                 }
+             if(checkpoint == false)
+                 try {
+                     PrintWriter printFile = new PrintWriter(new FileWriter("./printFiles/"+name+".txt",false));
+                     printFile.println(name);
+                     printFile.println();
+
+                     for (int i=0;i<LoadedClass.numStudents;i++){
+                         printFile.println("Student: "+ (String) table.getValueAt(i, 0));
+                         printFile.println();
+                         int num=1;
+                         for (int j=1;j<=LoadedClass.numMeetings;j++){
+                             printFile.println("Participation "+num +": "+(String) table.getValueAt(i,j) +"      "+"Assignment "+num+": "+(String) table.getValueAt(i,j+LoadedClass.numMeetings)+"      "+"Quiz "+num+": "+(String) table.getValueAt(i,j+(LoadedClass.numMeetings*2)));
+                             num++;
+                         }
+                         printFile.println();
+                         printFile.println("Participation average: "+(String) table.getValueAt(i, columnNames.length-8) +"     "+ "Assignment average: "+(String)table.getValueAt(i, columnNames.length-7) + "       "+"Quiz average: "+(String) table.getValueAt(i, columnNames.length-6));
+                         printFile.println();
+                         printFile.println("Participation total: "+(String) table.getValueAt(i, columnNames.length-5) +"     "+ "Assignment total: "+(String)table.getValueAt(i, columnNames.length-4) + "       "+"Quiz total: "+(String) table.getValueAt(i, columnNames.length-3));
+                         printFile.println();
+                         printFile.println("Final Exam: " + (String) table.getValueAt(i, columnNames.length-9));
+                         printFile.println("Overall: " + (String) table.getValueAt(i, columnNames.length-2));
+                         printFile.println("Letter Grade: "+(String)table.getValueAt(i, columnNames.length-1));
+                         printFile.println();
+                         printFile.println();
+
+                     }
+
+                     printFile.close();
+                     ArrayList<String> print= new ArrayList<>();;
+                     try {
+                         File file = new File("./printFiles/"+name+".txt");
+                         Scanner read = new Scanner(new FileReader(file));
+                         while(read.hasNextLine()){
+                             print.add(read.nextLine());
+                         }
+                         read.close();
+                     }
+
+                     catch (Exception t){JOptionPane.showMessageDialog(null,"Error happened");}
+                     MyPrintableTable mpt = new MyPrintableTable(print);
+                     PrinterJob job = PrinterJob.getPrinterJob();
+                     // PageFormat pf = job.defaultPage();
+                     job.setPrintable(mpt);
+                     job.printDialog();
+                     try {
+                         job.print();
+                     } catch (PrinterException t) {
+                         new Exceptions("Printing failed");
+                     }
+
+                 }
+                 catch(Exception t) { new Exceptions("This File does not exist.");}
 
                 }});
 
@@ -349,101 +434,181 @@ public class LoadedClass {
         bottombtnPnl.add(save);
         save.setText("Save");
         save.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e) {
-                    if(table.isEditing())
-                        table.getCellEditor().stopCellEditing();
-                    boolean checkpoint=false;
-                    try{
-                        for (int i = 0;i<LoadedClass.numStudents;i++)
-                            for (int j=0;j<columnNames.length;j++)
-                            {
-                                if(  table.getValueAt(i,j)==null||table.getValueAt(i,j).equals(""))
-                                    table.setValueAt("N/A",i,j);
-                            }
-                        for (int i=0;i<LoadedClass.numStudents;i++){
-                            int quizTotal=0;
-                            int assTotal=0;
-                            int partTotal=0;
-                            int quizAveNum=0;
-                            int assAveNum=0;
-                            int partAveNum=0;
-                            for(int j=1;j<numMeetings+1;j++)
-                            {
-                                String value;
-                                value = table.getValueAt(i,j).toString();
+        	 if(table.isEditing())
+                 table.getCellEditor().stopCellEditing();
+             boolean checkpoint=false;
+             try{
+                 for (int i = 0;i<LoadedClass.numStudents;i++)
+                     for (int j=0;j<columnNames.length;j++)
+                     {
+                         if(  table.getValueAt(i,j)==null||table.getValueAt(i,j).equals(""))
+                             table.setValueAt("N/A",i,j);
+                     }
+                 for (int i=0;i<LoadedClass.numStudents;i++){
+                     int quizTotal=0;
+                     int assTotal=0;
+                     int partTotal=0;
+                     int quizAveNum=0;
+                     int assAveNum=0;
+                     int partAveNum=0;
+                     for(int j=1;j<numMeetings+1;j++)
+                     {
+                         String value;
+                         value = table.getValueAt(i,j).toString();
 
-                                if (!value.equals("N/A")||value.equals(""))
-                                {                            
-                                    partTotal+=Integer.parseInt(value);
-                                    table.setValueAt(value,i,j);
-                                    partAveNum++;
-                                }
-                                else
-                                    table.setValueAt(value,i,j);
-                            }
-                            for (int j=numMeetings+1;j<numMeetings*2+1;j++)
-                            {
-                                String value;
+                         if (!value.equals("N/A")||value.equals(""))
+                         {                            
+                             partTotal+=Integer.parseInt(value);
+                             table.setValueAt(value,i,j);
+                             partAveNum++;
+                         }
+                         else
+                             table.setValueAt(value,i,j);
+                     }
+                     for (int j=numMeetings+1;j<numMeetings*2+1;j++)
+                     {
+                         String value;
 
-                                value = table.getValueAt(i,j).toString();
-                                if (!value.equals("N/A")||value.equals(""))
-                                {                            
-                                    assTotal+=Integer.parseInt(value);
-                                    table.setValueAt(value,i,j);
-                                    assAveNum++;
-                                }
-                                else
-                                    table.setValueAt(value,i,j);
-                            }
-                            for(int j=numMeetings*2+1;j<columnNames.length-8;j++)
-                            {
-                                String value;
+                         value = table.getValueAt(i,j).toString();
+                         if (!value.equals("N/A")||value.equals(""))
+                         {                            
+                             assTotal+=Integer.parseInt(value);
+                             table.setValueAt(value,i,j);
+                             assAveNum++;
+                         }
+                         else
+                             table.setValueAt(value,i,j);
+                     }
+                     for(int j=numMeetings*2+1;j<columnNames.length-9;j++)
+                     {
+                         String value;
 
-                                value = table.getValueAt(i,j).toString();
-                                if (!value.equals("N/A")||value.equals(""))
-                                {                            
-                                    quizTotal+=Integer.parseInt(value);
-                                    table.setValueAt(value,i,j);
-                                    quizAveNum++;
-                                }
-                                else
-                                    table.setValueAt(value,i,j);
-                            }
+                         value = table.getValueAt(i,j).toString();
+                         if (!value.equals("N/A")||value.equals(""))
+                         {                            
+                             quizTotal+=Integer.parseInt(value);
+                             table.setValueAt(value,i,j);
+                             quizAveNum++;
+                         }
+                         else
+                             table.setValueAt(value,i,j);
+                     }
 
-                            String exam =  table.getValueAt(i,columnNames.length-8).toString();
-                            int finalExam=0;
-                            if (exam.equals("N/A")||exam.equals(""))
-                            {
-                                table.setValueAt(exam,i,columnNames.length-8);}
-                            else
-                            {
-                                finalExam= Integer.parseInt(exam);
-                                table.setValueAt(exam,i,columnNames.length-8);
-                            }
+                     String exam =  table.getValueAt(i,columnNames.length-9).toString();
+                     int finalExam=0;
+                     if (exam.equals("N/A")||exam.equals(""))
+                     {
+                         table.setValueAt(exam,i,columnNames.length-9);}
+                     else
+                     {
+                     
+                         finalExam= Integer.parseInt(exam);
+                         table.setValueAt(exam,i,columnNames.length-9);
+                     }
+                     
+                     
+                     int partAve=0;
+                     int assAve=0;
+                     int quizAve=0;
+                     if(partAveNum!=0)
+                         partAve=Math.round(partTotal/partAveNum);
+                     if(assAveNum!=0)
+                         assAve=Math.round(assTotal/assAveNum);
+                     if(quizAveNum!=0)
+                         quizAve=Math.round(quizTotal/quizAveNum);
 
-                            int partAve=0;
-                            int assAve=0;
-                            int quizAve=0;
-                            if(partAveNum!=0)
-                                partAve=Math.round(partTotal/partAveNum);
-                            if(assAveNum!=0)
-                                assAve=Math.round(assTotal/assAveNum);
-                            if(quizAveNum!=0)
-                                quizAve=Math.round(quizTotal/quizAveNum);
+                     table.setValueAt(partAve,i,columnNames.length-8);
+                     table.setValueAt(assAve,i,columnNames.length-7);
+                     table.setValueAt(quizAve,i,columnNames.length-6);
+                     table.setValueAt(Math.round(partAve*.1),i,columnNames.length-5);
+                     table.setValueAt(Math.round(assAve*.15),i,columnNames.length-4);
+                     table.setValueAt(Math.round(quizAve*.5),i,columnNames.length-3);
 
-                            table.setValueAt(partAve,i,columnNames.length-7);
-                            table.setValueAt(assAve,i,columnNames.length-6);
-                            table.setValueAt(quizAve,i,columnNames.length-5);
-                            table.setValueAt(Math.round(partAve*.1),i,columnNames.length-4);
-                            table.setValueAt(Math.round(assAve*.15),i,columnNames.length-3);
-                            table.setValueAt(Math.round(quizAve*.5),i,columnNames.length-2);
+                     table.setValueAt((Math.round(partAve*.1)+Math.round(assAve*.15)+Math.round(quizAve*.5)+Math.round(finalExam*.25)),i,columnNames.length-2);
+                     for(int j=columnNames.length-8;j<columnNames.length-1;j++)
+                     {
+                         String value=  table.getValueAt(i,j).toString();
+                         table.setValueAt(value,i,j);
+                     }
+                     
+                     
+                     int value = Integer.parseInt(table.getValueAt(i, columnNames.length-2).toString());
+                     if (value<=59) {
+                     table.setValueAt("F", i,columnNames.length-1);
 
-                            table.setValueAt((Math.round(partAve*.1)+Math.round(assAve*.15)+Math.round(quizAve*.5)+Math.round(finalExam*.25)),i,columnNames.length-1);
-                            for(int j=columnNames.length-8;j<columnNames.length;j++)
-                            {
-                                String value=  table.getValueAt(i,j).toString();
-                                table.setValueAt(value,i,j);
-                            }
 
+                 }
+                     if (value >= 60 && value <= 62 ) {
+                         table.setValueAt("D-", i,columnNames.length-1);
+ 
+
+                     }
+                     
+                     if (value >= 63 && value <= 66 ) {
+                         table.setValueAt("D", i,columnNames.length-1);
+ 
+
+                     }
+                     
+                     if (value >= 67 && value <= 69 ) {
+                         table.setValueAt("D+", i,columnNames.length-1);
+ 
+
+                     }
+                     
+                     if (value >= 70 && value <= 72 ) {
+                         table.setValueAt("C-", i,columnNames.length-1);
+ 
+
+                     }
+                     
+                     if (value >= 73 && value <= 76 ) {
+                         table.setValueAt("C", i,columnNames.length-1);
+ 
+
+                     }
+                     
+                     if (value >= 77 && value <= 79 ) {
+                         table.setValueAt("C+", i,columnNames.length-1);
+ 
+
+                     }
+                     
+                     if (value >= 80 && value <= 82 ) {
+                         table.setValueAt("B-", i,columnNames.length-1);
+ 
+
+                     }
+                     
+                     if (value >= 83 && value <= 86 ) {
+                         table.setValueAt("B", i,columnNames.length-1);
+ 
+
+                     }
+                     
+                     if (value >= 87 && value <= 89 ) {
+                         table.setValueAt("B+", i,columnNames.length-1);
+ 
+
+                     }
+                     
+                     if (value >= 90 && value <= 92 ) {
+                         table.setValueAt("A-", i,columnNames.length-1);
+ 
+
+                     }
+                     
+                     if (value >= 93 && value <= 96 ) {
+                         table.setValueAt("A", i,columnNames.length-1);
+ 
+
+                     }
+                     
+                     if (value >= 97  ) {
+                         table.setValueAt("A+", i,columnNames.length-1);
+ 
+
+                     }
                         }
                     }
                     catch (Exception t) {
@@ -451,7 +616,7 @@ public class LoadedClass {
                         new Exceptions("Please enter whole numbers.");
                         checkpoint=true;
                     }
-                    if (checkpoint==false)
+                    if(checkpoint==false)
                         try {
 
                             File parentDir = new File("./txtFiles");
@@ -462,10 +627,12 @@ public class LoadedClass {
 
                             PrintWriter writer = new PrintWriter(new FileWriter("./txtFiles/" + name + ".txt",false));
                             data = new String[LoadedClass.numStudents][columnNames.length];
+
                             for (int i = 0;i<LoadedClass.numStudents;i++)
                                 for (int j=0;j<columnNames.length;j++)
-                                    data[i][j]=table.getValueAt(i,j).toString();
-
+                                {
+                                    data[i][j] =  table.getValueAt(i,j).toString();
+                                }
                             writer.println(LoadedClass.numStudents);
                             writer.println(LoadedClass.numMeetings);
 
@@ -478,6 +645,7 @@ public class LoadedClass {
                             writer.close();
                         }
                         catch(IOException t){JOptionPane.showMessageDialog(null, "This File does not exist.");}
+
 
                 }});
         bottombtnPnl.add(save);
