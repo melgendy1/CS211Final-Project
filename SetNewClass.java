@@ -3,7 +3,7 @@
  * GUI. This class reads the contents of a folder for txt files
  * to check if the user entered a name for a file that already exists
  */
-
+import java.util.*;
 import java.io.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -56,9 +56,33 @@ public class SetNewClass extends JFrame {
                     File dir = new File("./txtFiles");
                     dir.mkdir();
                     boolean checkpointReached=false;
+                    //exception handling for the date
                     try {
-                        if (name.contains("/")||name.contains("\\")||name.contains(":")||name.contains("?")||name.contains("\"")||name.contains("<")||name.contains(">")||name.contains("|")||name.contains("*"))
+                        if(textfield1.getText().length() != 8) {
+                            throw new Exceptions("Please change format of the date to MM-DD-YY");
+                        }
+                        if(textfield1.getText().charAt(2)!='-' || textfield1.getText().charAt(5)!='-') {
+                            throw new Exceptions("Please change format of the date to MM-DD-YY");
+                        }
+                        if(Integer.parseInt(textfield1.getText().substring(0,2)) > 12 || Integer.parseInt(textfield1.getText().substring(0,2)) < 1) {
+                            throw new Exceptions("Make sure its a valid month between 1-12");
+                        }
+                        if(Integer.parseInt(textfield1.getText().substring(3,5)) > 31 || Integer.parseInt(textfield1.getText().substring(3,5)) < 1) {
+                            throw new Exceptions("Make sure its a valid day btween 1-31");
+                        }
+                        if(Integer.parseInt(textfield1.getText().substring(6)) > 99 || Integer.parseInt(textfield1.getText().substring(6)) < 0) {
+                            throw new Exceptions("Make sure its a valid year between 00-99");
+                        }
+                        
+                    }
+                    catch(Exception t) {
+                        checkpointReached=true;
+                    }
+            
+                    try {
+                        if (name.contains("/")||name.contains("\\")||name.contains(":")||name.contains("?")||name.contains("\"")||name.contains("<")||name.contains(">")||name.contains("|")||name.contains("*")){
                             throw new Exceptions("Name cannot contain / \\ : ? \" < > | *\nPlease change format of date to MM-DD-YY or\nchange class name.");
+                        }
 
 
                     } catch (Exception t){
