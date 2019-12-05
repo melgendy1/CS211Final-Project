@@ -1,3 +1,9 @@
+/**
+ * This class extends the class JFrame to create the NewClass
+ * GUI. This class reads the contents of a folder for txt files
+ * to check if the user entered a name for a file that already exists
+ */
+
 import java.io.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -33,7 +39,7 @@ public class SetNewClass extends JFrame {
         frame.setResizable(true);
 
         JPanel contentPane = new JPanel(null);
-
+        // GUI component for the create button
         button1 = new JButton();
         button1.setBounds(299,316,90,35);
         button1.setLocation((((this.getWidth()-button1.getWidth())/2)+200),((this.getHeight()-button1.getHeight())/2)-30);
@@ -91,6 +97,8 @@ public class SetNewClass extends JFrame {
 
                 }});
 
+
+        // GUI component for the back button
         JButton back = new JButton();
         back.setBounds(60,316,90,35);
         back.setLocation((((this.getWidth()-back.getWidth())/2)-235),((this.getHeight()-back.getHeight())/2)-30);
@@ -104,7 +112,7 @@ public class SetNewClass extends JFrame {
                     new MainMenu();
                     frame.dispose();
                 }});
-
+        // GUI component for "Create a new class" label
         label1 = new JLabel();
         label1.setBounds(149,93,223,29);
         label1.setLocation((((this.getWidth()/2)-125)),(this.getHeight()/4));
@@ -114,7 +122,7 @@ public class SetNewClass extends JFrame {
         label1.setFont(new Font("SansSerif",0,24));
         label1.setText("Create a new Class");
         label1.setVisible(true);
-
+        // GUI component for the "start date"
         label2 = new JLabel();
         label2.setBounds(55,206,195,33);
         label2.setLocation((((this.getWidth()-label2.getWidth())/2)-200),((this.getHeight()-label2.getHeight())/2)-100);
@@ -124,7 +132,7 @@ public class SetNewClass extends JFrame {
         label2.setFont(new Font("sansserif",0,12));
         label2.setText("Start Date in MM-DD-YY");
         label2.setVisible(true);
-
+        // GUI component for the "Name of the class"
         label3 = new JLabel();
         label3.setBounds(314,206,90,35);
         label3.setLocation((((this.getWidth()-label3.getWidth())/2)+200),((this.getHeight()-label3.getHeight())/2)-100);
@@ -134,7 +142,7 @@ public class SetNewClass extends JFrame {
         label3.setFont(new Font("sansserif",0,12));
         label3.setText("Name of Class");
         label3.setVisible(true);
-
+        // GUI component for the "Number of students"
         JLabel label4 = new JLabel();
         label4.setBounds(314,206,120,35);
         label4.setLocation((((this.getWidth()-label4.getWidth())/2-90)),((this.getHeight()-label4.getHeight())/2)-100);
@@ -144,7 +152,7 @@ public class SetNewClass extends JFrame {
         label4.setFont(new Font("sansserif",0,12));
         label4.setText("Number of Students");
         label4.setVisible(true);
-
+        // GUI component for the "Number of Meetings"
         JLabel label5 = new JLabel();
         label5.setBounds(314,206,120,35);
         label5.setLocation((((this.getWidth()-label5.getWidth())/2+50)),((this.getHeight()-label5.getHeight())/2)-100);
@@ -154,7 +162,7 @@ public class SetNewClass extends JFrame {
         label5.setFont(new Font("sansserif",0,12));
         label5.setText("Number of Meetings");
         label5.setVisible(true);
-
+        //GUI component to set the text field for inputs for the user
         textfield1 = new JTextField();
         textfield1.setBounds(60,243,121,29);
         textfield1.setLocation((((this.getWidth()-textfield1.getWidth())/2)-235),((this.getHeight()-textfield1.getHeight())/2)-70);
@@ -164,7 +172,7 @@ public class SetNewClass extends JFrame {
         textfield1.setFont(new Font("sansserif",0,12));
         textfield1.setText("");
         textfield1.setVisible(true);
-
+        //GUI component to set the text field for inputs for the user
         textfield2 = new JTextField();
         textfield2.setBounds(60,243,121,29);
         textfield2.setLocation((((this.getWidth()-textfield2.getWidth())/2)+200),((this.getHeight()-textfield2.getHeight())/2)-70);
@@ -174,7 +182,7 @@ public class SetNewClass extends JFrame {
         textfield2.setFont(new Font("sansserif",0,12));
         textfield2.setText("");
         textfield2.setVisible(true);
-
+        //GUI component to set the text field for inputs for the user
         textfield3 = new JTextField();
         textfield3.setBounds(60,243,121,29);
         textfield3.setLocation((((this.getWidth()-textfield3.getWidth())/2-90)),((this.getHeight()-textfield3.getHeight())/2)-70);
@@ -184,7 +192,7 @@ public class SetNewClass extends JFrame {
         textfield3.setFont(new Font("sansserif",0,12));
         textfield3.setText("");
         textfield3.setVisible(true);
-
+        //GUI component to set the text field for inputs for the user
         textfield4 = new JTextField();
         textfield4.setBounds(60,243,121,29);
         textfield4.setLocation((((this.getWidth()-textfield4.getWidth())/2+50)),((this.getHeight()-textfield4.getHeight())/2)-70);
@@ -209,7 +217,7 @@ public class SetNewClass extends JFrame {
         frame.add(label5);
         frame.add(contentPane);
 
-        //adding panel to JFrame and seting of window position and close operation
+        //adding panel to JFrame and setting of window position and close operation
         frame.add(contentPane);
         frame.setTitle("Student Grades");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
