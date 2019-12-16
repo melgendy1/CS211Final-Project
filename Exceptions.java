@@ -1,14 +1,15 @@
-/**
- * Exception class that handles any exception and provides
- * the related dialog box to the user
- */
-
-
 import javax.swing.*;
-
+/**
+ * Represents the exceptions will be using.
+ */
+@SuppressWarnings("serial")
 public class Exceptions extends Exception{
+	/**
+	 * The constructor for the error(s)
+	 * @param holds error message(s) as a string
+	 */
     public Exceptions(String error){
         JOptionPane.showMessageDialog(null, error);
-        // pops up a standard dialog box that prompts the user
+
     }
 }
