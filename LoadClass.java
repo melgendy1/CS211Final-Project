@@ -3,43 +3,49 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import java.lang.*;
-
+/**
+ * Represents the Load class for our grading system.
+ * We use JFrame to help construct this.
+ */
+@SuppressWarnings("serial")
 public class LoadClass extends JFrame{
-    private JMenuBar menuBar;
+	/**
+	 * The Load class has many attributes.
+	 * We Initialize them being private.
+	 * Meaning they are accessible within the same class only.
+	 */
+	private JMenuBar menuBar;
     private JButton button1;
-    private JComboBox combobox1;
+    @SuppressWarnings("rawtypes")
+	private JComboBox combobox1;
     private JLabel label1;
-
-    /*
-    *Constructor
-    */
-    public LoadClass(){
+    /**
+     * The constructor for the Load class.
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public LoadClass(){
         File folder = new File("./txtFiles");
         File[] files = folder.listFiles();
-        
-        /*
-        * Setting title and size for the page
-        */
-        
         this.setTitle("Load a Class");
         this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        //menu generate method
-
+        /**
+         * The menu generate method.
+         * @param is our menu bar.
+         */
         this.setJMenuBar(menuBar);
-        /*
-        *pane with null layout
-        */
+        /**
+         * The pane with the null layout.
+         */
         JPanel contentPane = new JPanel(null);
         JFrame frame = new JFrame();
         frame.setPreferredSize( Toolkit.getDefaultToolkit().getScreenSize());
         frame.setAlwaysOnTop(false);
         frame.setVisible(true);
         frame.setResizable(true);
-        
-        /*
-        * Setting the location, colors, font, and text size for the button
-        */
+        /**
+         * The "Load" Button 
+         * Along with its functionalities
+         */
         button1 = new JButton();
         button1.setBounds(296,234,90,35);
         button1.setLocation(((((this.getWidth()-button1.getWidth())/2)+200)),((this.getHeight()/2)-100));
@@ -49,10 +55,10 @@ public class LoadClass extends JFrame{
         button1.setFont(new Font("sansserif",0,12));
         button1.setText("Load");
         button1.setVisible(true);
-
-        /*
-        * This handles an error message that a user might come across also adds information into the combo box.
-        */
+        /**
+         * if and when the user interacts with the Load button,
+         * the program will be able to notice and run accordingly.
+         */
         button1.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 
@@ -61,15 +67,28 @@ public class LoadClass extends JFrame{
                             throw new Exception();
 
                         String name=combobox1.getSelectedItem().toString();
-
+                        /**
+                         * for the inputs of students,meetings,weights, etc
+                         */
                         File file = new File("./txtFiles/"+name+".txt");
                         BufferedReader read = new BufferedReader(new FileReader(file));
                         String students =read.readLine();
                         String meetings =read.readLine();
+                        String partWeight = read.readLine();
+                        String assWeight = read.readLine();
+                        String quizWeight = read.readLine();
+                        String examWeight = read.readLine();
                         read.close();
+                        /**
+                         * to ensure the user inputs for these are integers
+                         */
                         int numStudents = Integer.parseInt(students);
                         int numMeetings = Integer.parseInt(meetings);
-                        new LoadedClass(name,numStudents,numMeetings);
+                        int weightPart = Integer.parseInt(partWeight);
+                        int weightAss = Integer.parseInt(assWeight);
+                        int weightQuiz = Integer.parseInt(quizWeight);
+                        int weightExam = Integer.parseInt(examWeight);
+                        new LoadedClass(name,numStudents,numMeetings, weightPart, weightAss, weightQuiz, weightExam);
                         frame.dispose();
 
                     }
@@ -77,10 +96,10 @@ public class LoadClass extends JFrame{
                 }
 
             });
-            
-        /*
-        * Setting the bounds for the 'back' button
-        */
+        /**
+         * The "Back" button
+         * Along with its functionalities
+         */
         JButton back = new JButton();
         back.setBounds(200,334,90,35);
         back.setLocation((((this.getWidth()-back.getWidth())/2)),((this.getHeight()/2)+100));
@@ -96,12 +115,9 @@ public class LoadClass extends JFrame{
                     frame.dispose();
                 }
             });
-        
-        /*
-        * This reads the text files and if there is nothing inside the folder, it gives an empty combo box.
-        * Otherwise it makes a combo box that is essentially a drop down menu. It will contain the name of the text file
-        * Then you have the option to click on it and it redirects you to said text file.
-        */
+        /**
+         * the method for loading the created classes.
+         */
         String[] txtFiles=new String[0];
         if(files!=null)
         { txtFiles = new String[files.length];
@@ -112,6 +128,10 @@ public class LoadClass extends JFrame{
             combobox1 = new JComboBox(txtFiles);}
         else
             combobox1 = new JComboBox();
+        /**
+         * The selection to pick which class to Load.
+         * This serves as the drop down box with a list of all the files.
+         */
         combobox1.setBounds(91,233,120,35);
         combobox1.setLocation(((((this.getWidth()-combobox1.getWidth())/2)-200)),((this.getHeight()/2)-100));
         combobox1.setBackground(new Color(214,217,223));
@@ -129,30 +149,26 @@ public class LoadClass extends JFrame{
         label1.setFont(new Font("SansSerif",0,24));
         label1.setText("Pick a class to load");
         label1.setVisible(true);
-
-        /*
-        *adding components to contentPane panel
-        */
+        /**
+         * adding the components to content pane panel
+         */
         contentPane.add(button1);
         contentPane.add(back);
         contentPane.add(combobox1);
         contentPane.add(label1);
-        
-
-        /*
-        *adding panel to JFrame and seting of window position and close operation
-        */
+        /**
+         * adding panel to JFrame and setting of the window position
+         * as well as the Closing operation
+         */
         frame.add(contentPane);
         frame.setTitle("Student Grades");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
-
-    /*
-    *method for generate menu
-    */
-
+    /**
+     * the main method to generate the menu
+     */
     public static void main(String[] args){
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
