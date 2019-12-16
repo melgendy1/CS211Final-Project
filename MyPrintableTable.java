@@ -4,15 +4,23 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Font;
 import java.awt.Color;
-
+/**
+ * Represents the Information we want to print out.
+ */
 public class MyPrintableTable implements Printable {
     private int linesPerPage = 30;
     private List<String> sTable;
+    /**
+     * The Constructor for the Printable Table.
+     */
     public MyPrintableTable(ArrayList<String> sTable)
     {
         this.sTable=sTable;
     }
-
+    /**
+     * The method that actually reads the excel and
+     * puts it onto a page.
+     */
     public int print(Graphics g, PageFormat pf, int pageIndex) {
         if (pageIndex * linesPerPage >= sTable.size())
             return NO_SUCH_PAGE;
