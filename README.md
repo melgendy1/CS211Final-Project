@@ -14,7 +14,7 @@ General Rules-
 	*This means the whole folder (titled "PopPop") will have to be moved to the desktop.
 	*Do NOT move any files or folders within the folder containing the whole project to anywhere
 		outside the folder.
-	*You may create a shortcut for the .jar file that runs the program to place on your desktop
+	*You may create a shortcut for the .jar file that runs the program to place on your desktop.
 	*Within the txtFiles and printFiles folders, there are txt files titled "-". The user can choose to keep or 
 		delete these files. The file in the printFiles folder will never be seen by the user, but the one in txtFiles 
 		will. In the Load Class section, it will appear in the slection box. It is up to the user whether they want to keep it.
