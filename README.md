@@ -1,5 +1,5 @@
 Tannon Carro
-Natneal Haile
+Natnael Haile
 Mohamed Elgendy
 Jaspreet Bassi
 
