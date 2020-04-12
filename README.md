@@ -5,7 +5,7 @@ Jaspreet Bassi
 
 Mengistu CS-211-002
 
-******This program was created specifically for Ron Knapp, so it follows his specifications.******
+*****This program was created specifically for Ron Knapp, so it follows his specifications.*****
 
 General Rules-
 
