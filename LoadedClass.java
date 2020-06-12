@@ -15,6 +15,7 @@ import java.awt.print.*;
 /**
  * Represents the classes we will be loading.
  */
+
 public class LoadedClass {
 	/**
 	 * The Loaded class has many attributes.
